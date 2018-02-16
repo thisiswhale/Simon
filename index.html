@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Simon</title>
   <link href="https://fonts.googleapis.com/css?family=Kavivanar" rel="stylesheet">
+  <link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -13,9 +15,9 @@
   <div class="container">
     <div class="top-panel">
       <h1 class="title">SIMON</h1>
-      <div class="nav start-btn">START</div>
-      <div class="nav round-status">ROUND 01</div>
-      <div class="nav strict-btn">STRICT</div>
+      <div class="nav start-btn animated infinite pulse" onclick='startGame()'>START</div>
+      <div class="nav round-status animated infinite wobble">ROUND 01</div>
+      <div class="nav strict-btn animated infinite shake" >STRICT</div>
     </div>
     <div class="gameboard">
     <div class="panel" id ="green">

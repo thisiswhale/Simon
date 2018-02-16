@@ -34,8 +34,11 @@ html,body
   border: 10px solid
   border-radius: 100%
   display: inline-block
+  animation-duration: 0.5s
+  -webkit-animation-duration: 0.5s
   position: absolute
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15)
+
 .panel#green
   //background-color: rgba(52,168,83,1.0)
   bottom: 0
@@ -54,6 +57,7 @@ html,body
   left: 0
   border-color: rgba(251,188,5,1.0)
 
+
 .panel#green:active
   background-color: rgba(52,168,83,0.8)
 .panel#red:active
@@ -61,4 +65,13 @@ html,body
 .panel#blue:active
   background-color: rgba(66,133,244,0.80)
 .panel#yellow:active
+  background-color: rgba(251,188,5,0.8)
+
+.panel.lit#green
+  background-color: rgba(52,168,83,0.8)
+.panel.lit#red
+  background-color: rgba(234,67,53,0.8)
+.panel.lit#blue
+  background-color: rgba(66,133,244,0.80)
+.panel.lit#yellow
   background-color: rgba(251,188,5,0.8)
