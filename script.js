@@ -10,24 +10,17 @@ const simon4 = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3'
 //simon1.play();
 
 const panels = document.getElementsByClassName('panel')
-
+const totalRound = 20;
 for (let i = 0; i < panels.length; i++){
 panels[i].addEventListener('click', playSound);
-panels[i].addEventListener('play', function(e){
-var audios = document.getElementsByTagName('audio');
-for(var i = 0, len = audios.length; i < len;i++){
-    if(audios[i] != e.target){
-        audios[i].pause();
-        audios[i].currentTime = 0;
-    }
-}
-}, true);
+
 }
 function playSound(){
   const color = this.getAttribute('id');
   const audio = document.querySelector(`audio[data-key="${color}"]`);
   console.log(this)
   audio.currentTime = 0;
+  audio.playbackRate = 0.75;
   audio.play();
 
 }
@@ -36,4 +29,7 @@ let memory = [];
 function playRound(){
   let randomNum =Math.floor((Math.random() * 4) + 1)
   memory.push(randomNum);
+
 }
+
+//setTimeOut(computerPlay(i),1000)
