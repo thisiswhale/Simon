@@ -58,6 +58,7 @@ function startGame() {
   simonMemory = [];
   playerMemory = [];
   currentRound = 1;
+  roundStatus.innerHTML = 'ROUND ' + currentRound;
   newRound();
   allowClickEvent()
 }
@@ -121,7 +122,7 @@ function checkPattern(thisPanel) {
     if ((thisSequence + 1) == simonMemory.length) {
       thisSequence = 0;
       currentRound++;
-      document.querySelector('.round-status').innerHTML = 'ROUND ' + currentRound;
+      roundStatus.innerHTML = 'ROUND ' + currentRound;
       animateRound(correct);
       setTimeout(newRound, 1000);
     } else {
