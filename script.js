@@ -1,9 +1,9 @@
 let simonMemory = [];
 let playerMemory = [];
-let currentRound = 1;
+let counterRound = 1;
 const totalRound = 20;
-let roundSpeedDuration = 1000;
-let playSpeed = 1;
+let roundSpeedDuration = 1200;
+let playSpeed = 0.5; //lowest playback with sound
 let thisSequence = 0;
 let strict = false;
 
@@ -55,9 +55,12 @@ function startGame() {
   window.setTimeout(function() {
     startBtn.classList.remove('animated','rubberBand');
   }, animationDuration);
+//initial animation
+  // animation-duration: 0.75s
+  // -webkit-animation-duration: 0.75s
   simonMemory = [];
   playerMemory = [];
-  currentRound = 1;
+  counterRound = 1;
   roundStatus.innerHTML = 'ROUND ' + currentRound;
   newRound();
   allowClickEvent()
@@ -77,7 +80,7 @@ function blockClickEvent(){
 function newRound() {
   const randomNum = Math.floor(Math.random() * 3);
   simonMemory.push(gameboard[randomNum]);
-  animate(simonMemory)
+  animate(randomNum)
 }
 
 function animate(sequence) { //sequence is an array
@@ -89,7 +92,7 @@ function animate(sequence) { //sequence is an array
     if (i >= sequence.length) {
       clearInterval(interval);
     }
-  }, 600);
+  }, roundSpeedDuration);
 }
 
 function lightUp(panel) { //panel is a string 'green'
@@ -121,9 +124,8 @@ function checkPattern(thisPanel) {
   if (simonMemory[thisSequence] == thisPanel) {
     if ((thisSequence + 1) == simonMemory.length) {
       thisSequence = 0;
-      currentRound++;
-      roundStatus.innerHTML = 'ROUND ' + currentRound;
-      animateRound(correct);
+      counterRound++;
+      checkRound(counterRound);
       setTimeout(newRound, 1000);
     } else {
       thisSequence++;
@@ -139,6 +141,32 @@ function checkPattern(thisPanel) {
     setTimeout(animate.bind(null, simonMemory), 1000);
   }
   allowClickEvent();
+}
+function checkRound(thisRound){
+  if(thisRound == 5){
+    // animation-duration: 0.65s
+    // -webkit-animation-duration: 0.65s
+    roundSpeedDuration = 1000;
+    playSpeed = 0.75;
+  }
+  else if( thisRound == 10 ){
+    // animation-duration: 0.55s
+    // -webkit-animation-duration: 0.55s
+    roundSpeedDuration = 800;
+    playSpeed = 1.0;
+  }
+  else if( thisRound == 15 ){
+    // animation-duration: 0.45s
+    // -webkit-animation-duration: 0.45s
+    roundSpeedDuration = 500;
+    playSpeed = 1.5;
+  }
+  else if( thisRound == 20 ){
+    //you win!
+  }
+  roundStatus.innerHTML = 'ROUND ' + currentRound;
+  animateRound(correct);
+
 }
 
 function animateRound(correct) {
@@ -156,4 +184,7 @@ function animateRound(correct) {
   }
   blockClickEvent();
 }
-//setTimeOut(computerPlay(i),1000)
+//Goals
+//Add animation duration change for each difficult level
+//Add a sound, when play gets pattern wrong
+//add status such as "Your turn to follow", "Simon Says..", "Incorrect!", "Good Job!"
