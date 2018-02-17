@@ -16,11 +16,25 @@ html, body {
 
 .top-panel {
   margin: 0 auto;
-  text-align: center; }
+  text-align: center;
+  animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s; }
 
 .nav {
   display: inline-block;
   margin: 0 100px; }
+
+.start-btn {
+  cursor: pointer; }
+
+.strict-btn {
+  cursor: pointer; }
+
+.strict-btn.on {
+  color: yellow; }
+
+.round-status.wrong {
+  color: red; }
 
 .gameboard {
   height: 425px;
