@@ -2,6 +2,7 @@ let simonMemory = [];
 let counterRound = 1;
 let thisSequence = 0;
 let strict = false;
+let status = "";
 
 const levels = {
   round1: {
@@ -141,8 +142,8 @@ function playSound(panel) { //panel is a string 'green'
   audio.play();
 }
 
-function playErrorSound(panel) { //panel is a string 'green'
-  const audio = document.querySelector(`audio[data-key="${panel}"]`);
+function playErrorSound() { //panel is a string 'green'
+  const audio = document.querySelector(`audio[data-key=wrong]`);
   audio.currentTime = 0;
   audio.play();
 }
@@ -189,12 +190,13 @@ function checkRound(thisRound) {
 }
 
 function animateRound(correct) {
-  if (correct) {
+  if (correct) { //answer is right, true
     roundStatus.classList.add('correct', 'animated', 'wobble');
     window.setTimeout(function() {
       roundStatus.classList.remove('correct', 'animated', 'wobble');
     }, animationDuration);
-  } else if (!correct) {
+  } else if (!correct) { //answer is wrong, false
+    playErrorSound();
     roundStatus.classList.add('wrong', 'animated', 'shake');
     window.setTimeout(function() {
       roundStatus.classList.remove('wrong', 'animated', 'shake');
@@ -203,5 +205,4 @@ function animateRound(correct) {
   blockClickEvent();
 }
 //Goals
-//Add a sound, when play gets pattern wrong
 //add status such as "Your turn to follow", "Simon Says..", "Incorrect!", "Good Job!"
