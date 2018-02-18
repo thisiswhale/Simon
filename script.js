@@ -1,8 +1,7 @@
-let simonMemory = [];
-let counterRound = 1;
-let thisSequence = 0;
+let simonMemory,
+  counterRound,
+  thisSequence;
 let strict = false;
-let status = "";
 
 const levels = {
   round1: {
@@ -34,6 +33,7 @@ const panels = document.getElementsByClassName('panel');
 const roundStatus = document.querySelector('.round-status');
 const strictBtn = document.querySelector('.strict-btn');
 const startBtn = document.querySelector('.start-btn');
+const statusBox = document.querySelector('.status-bar')
 const btn = document.getElementsByClassName('btn');
 
 for (let i = 0; i < btn.length; i++) {
@@ -53,7 +53,6 @@ function setDifficulty(setLevel) {
   }
   roundSpeedDuration = setLevel.roundSpeed;
   playbackSpeed = setLevel.soundSpeed;
-
 }
 
 function startGame() {
@@ -65,6 +64,7 @@ function startGame() {
   setDifficulty(levels.round1)
   simonMemory = [];
   counterRound = 1;
+  thisSequence = 0;
   roundStatus.innerHTML = 'ROUND ' + counterRound;
   newRound();
   allowClickEvent()
@@ -77,13 +77,13 @@ function strictMode() {
     strictBtn.classList.remove('on');
     window.setTimeout(function() {
       strictBtn.classList.remove('animated', 'tada');
-    }, animationDuration);
+    }, 1000);
   } else {
     strict = true
     strictBtn.classList.add('on', 'animated', 'tada')
     window.setTimeout(function() {
       strictBtn.classList.remove('animated', 'tada');
-    }, animationDuration);
+    }, 1000);
   }
 }
 
@@ -113,6 +113,7 @@ function newRound() {
 }
 
 function animate(sequence) { //sequence is an array
+  sendStatus('SIMON SAYS...');
   var i = 0;
   var interval = setInterval(function() {
     lightUp(sequence[i]);
@@ -120,8 +121,35 @@ function animate(sequence) { //sequence is an array
     i++;
     if (i >= sequence.length) {
       clearInterval(interval);
+      setTimeout(sendStatus.bind(null, 'YOUR TURN!!'), 1000)
     }
   }, roundSpeedDuration);
+
+}
+
+function sendStatus(str) {
+  statusBox.innerHTML = str
+  switch (str) {
+    case 'SIMON SAYS...':
+      statusBox.classList.add('animated', 'zoomIn');
+      window.setTimeout(function() {
+        statusBox.classList.remove('animated', 'zoomIn');
+      }, 1000);
+      break;
+    case 'YOUR TURN!!':
+      statusBox.classList.add('animated', 'flash');
+      window.setTimeout(function() {
+        statusBox.classList.remove('animated', 'flash');
+      }, 1000);
+      break;
+    case 'YOU WIN!!':
+      playSound('victory');
+      statusBox.classList.add('animated', 'zoomInRight');
+      window.setTimeout(function() {
+        statusBox.classList.remove('animated', 'zoomInRight');
+      }, 1000);
+      break;
+  }
 }
 
 function lightUp(panel) { //panel is a string 'green'
@@ -135,15 +163,22 @@ function lightUp(panel) { //panel is a string 'green'
 
 }
 
-function playSound(panel) { //panel is a string 'green'
-  const audio = document.querySelector(`audio[data-key="${panel}"]`);
+function playSound(word) { //panel is a string 'green'
+  const audio = document.querySelector(`audio[data-key="${word}"]`);
   audio.currentTime = 0;
-  audio.playbackRate = playbackSpeed;
+  if (gameboard.includes(word)) {
+    audio.playbackRate = playbackSpeed;
+  }
   audio.play();
 }
 
 function playErrorSound() { //panel is a string 'green'
   const audio = document.querySelector(`audio[data-key=wrong]`);
+  audio.currentTime = 0;
+  audio.play();
+}
+function playVictorySound() {
+  const audio = document.querySelector(`audio[data-key=victory]`);
   audio.currentTime = 0;
   audio.play();
 }
@@ -153,7 +188,7 @@ function checkPattern(thisPanel) {
   if (simonMemory[thisSequence] == thisPanel) {
     if ((thisSequence + 1) == simonMemory.length) {
       if (counterRound == 20) {
-        //you win
+        setTimeout(sendStatus.bind(null, 'YOU WIN!!'), 1000);
       } else {
         thisSequence = 0;
         counterRound++;
@@ -185,7 +220,6 @@ function checkRound(thisRound) {
   } else if (thisRound == 15) {
     setDifficulty(levels.round15)
   }
-
   roundStatus.innerHTML = 'ROUND ' + counterRound;
 }
 
@@ -196,7 +230,7 @@ function animateRound(correct) {
       roundStatus.classList.remove('correct', 'animated', 'wobble');
     }, animationDuration);
   } else if (!correct) { //answer is wrong, false
-    playErrorSound();
+    playSound('wrong');
     roundStatus.classList.add('wrong', 'animated', 'shake');
     window.setTimeout(function() {
       roundStatus.classList.remove('wrong', 'animated', 'shake');
@@ -204,5 +238,3 @@ function animateRound(correct) {
   }
   blockClickEvent();
 }
-//Goals
-//add status such as "Your turn to follow", "Simon Says..", "Incorrect!", "Good Job!"
