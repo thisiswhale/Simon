@@ -1,24 +1,32 @@
 let simonMemory = [];
 let counterRound = 1;
-const totalRound = 20;
 let thisSequence = 0;
 let strict = false;
 
-let round1RoundSpeed = 1000;
-let round5RoundSpeed = 800;
-let round10RoundSpeed = 600;
-let round15RoundSpeed = 400;
+const levels = {
+  round1: {
+    roundSpeed: 1000,
+    soundSpeed: 0.5,
+    animateSpeed: '0.75s'
+  },
+  round5: {
+    roundSpeed: 800,
+    soundSpeed: 1.0,
+    animateSpeed: '0.65s'
+  },
+  round10: {
+    roundSpeed: 600,
+    soundSpeed: 1.25,
+    animateSpeed: '0.55s'
+  },
+  round15: {
+    roundSpeed: 500,
+    soundSpeed: 1.30,
+    animateSpeed: '0.50s'
+  }
+}
 
-let round1SoundSpeed = 0.5
-let round5SoundSpeed = 1.0
-let round10SoundSpeed = 1.25
-let round15SoundSpeed = 1.5
-
-let round1AnimateSpeed = '0.75s'
-let round5AnimateSpeed = '0.65s'
-let round10AnimateSpeed = '0.55s'
-let round15AnimateSpeed = '0.50s'
-
+const totalRound = 20;
 const animationDuration = 500;
 const gameboard = ['green', 'blue', 'red', 'yellow'];
 const panels = document.getElementsByClassName('panel');
@@ -35,6 +43,30 @@ for (let i = 0; i < btn.length; i++) {
   btn[i].addEventListener('mouseout', function() {
     btn[i].classList.remove('animated', 'infinite', 'pulse')
   });
+}
+
+function setDifficulty(setLevel) {
+  for (let i = 0; i < panels.length; i++) {
+    panels[i].style.animationDuration = setLevel.animateSpeed;
+    panels[i].style.webkitAnimationDuration = setLevel.animateSpeed;
+  }
+  roundSpeedDuration = setLevel.roundSpeed;
+  playbackSpeed = setLevel.soundSpeed;
+
+}
+
+function startGame() {
+  startBtn.classList.add('animated', 'rubberBand')
+  window.setTimeout(function() {
+    startBtn.classList.remove('animated', 'rubberBand');
+  }, animationDuration);
+
+  setDifficulty(levels.round1)
+  simonMemory = [];
+  counterRound = 1;
+  roundStatus.innerHTML = 'ROUND ' + counterRound;
+  newRound();
+  allowClickEvent()
 }
 
 function strictMode() {
@@ -61,25 +93,12 @@ function getPanel() {
   checkPattern(color);
 }
 
-function startGame() {
-  startBtn.classList.add('animated', 'rubberBand')
-  window.setTimeout(function() {
-    startBtn.classList.remove('animated', 'rubberBand');
-  }, animationDuration);
-
-  setDifficulty(round1AnimateSpeed, round1RoundSpeed, round1SoundSpeed)
-  simonMemory = [];
-  counterRound = 1;
-  roundStatus.innerHTML = 'ROUND ' + counterRound;
-  newRound();
-  allowClickEvent()
-}
-
 function allowClickEvent() {
   for (let i = 0; i < panels.length; i++) {
     panels[i].addEventListener('click', getPanel);
   }
 }
+
 function blockClickEvent() {
   for (let i = 0; i < panels.length; i++) {
     panels[i].removeEventListener('click', getPanel);
@@ -157,28 +176,16 @@ function checkPattern(thisPanel) {
   allowClickEvent();
 }
 
-function setDifficulty(animateSpeed, roundSpeed, soundSpeed) {
-  for (let i = 0; i < panels.length; i++) {
-    panels[i].style.animationDuration = animateSpeed;
-    panels[i].style.webkitAnimationDuration = animateSpeed;
-  }
-  roundSpeedDuration = roundSpeed;
-  playbackSpeed = soundSpeed;
-
-}
-
 function checkRound(thisRound) {
-
   if (thisRound == 5) {
-    setDifficulty(round5AnimateSpeed, round5RoundSpeed, round5SoundSpeed)
+    setDifficulty(levels.round5)
   } else if (thisRound == 10) {
-    setDifficulty(round10AnimateSpeed, round10RoundSpeed, round10SoundSpeed)
+    setDifficulty(levels.round10)
   } else if (thisRound == 15) {
-    setDifficulty(round15AnimateSpeed, round15RoundSpeed, round15SoundSpeed)
+    setDifficulty(levels.round15)
   }
 
   roundStatus.innerHTML = 'ROUND ' + counterRound;
-
 }
 
 function animateRound(correct) {
