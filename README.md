@@ -10,6 +10,7 @@ A classic, retro memory game gone viral in the 1980s. Simon will create a series
  - Has four colored buttons, each producing a particular tone when it is pressed.
  - Clicked the wrong button and Simon will repeat the round.
  - **Strict Mode** enabled will start the game over to Round 1 when player pressed the incorrect sequence. No second chances. Enable Strict Mode at anytime of any round.
+ - mobile and tablet friendly
 
 #### Built with
   - JavaScript
