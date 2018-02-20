@@ -1,17 +1,52 @@
+
+// Small tablets and large smartphones (landscape view)
+$screen-mobile-sm-min: 320px
+$screen-mobile-lg-min: 369px
+
+// Large tablets and tablets
+$screen-tablet-min: 768px
+$screen-desktop-min: 1024px
+@mixin mobile-sm
+  @media (min-width: #{$screen-mobile-sm-min})
+    @content
+
+@mixin mobile-lg
+  @media (min-width: #{$screen-mobile-lg-min})
+    @content
+
+@mixin tablet
+  @media (min-width: #{$screen-tablet-min})
+    @content
+
+@mixin desktop
+  @media (min-width: #{$screen-desktop-min})
+    @content
+
+
 html,body
   margin: 0
   font-family: 'Kavivanar', cursive
-  font-size: 1.6em
   background-image: url('https://www.toptal.com/designers/subtlepatterns/patterns/dark_wall.png')
   color: #fff
   text-shadow: black 1px 0 10px
+  @include mobile-sm
+    font-size: 1.2em
+  @include mobile-lg
+    font-size: 1.25em
+  @include tablet
+    font-size: 1.4em
+  @include desktop
+    font-size: 1.6em
+
 
 .container
   margin: 0 auto
   overflow: hidden
+
 .title
   margin: 15px
   margin-bottom: 10px
+
 .top-panel
   margin: 0 auto
   text-align: center
@@ -20,7 +55,16 @@ html,body
 
 .nav
   display: inline-block
-  margin: 0 100px
+  @include mobile-sm
+    margin: 10px 10px
+  @include mobile-lg
+    margin: 10px 10px
+  @include tablet
+    margin: 0 40px
+  @include desktop
+    margin: 0 90px
+
+
 
 .start-btn
   cursor: pointer
@@ -35,16 +79,22 @@ html,body
   color: red
 
 .gameboard
-  height: 425px
-  width: 425px
   margin: 0 auto
   margin-top: 10px
   position: relative
+  @include mobile-sm
+    height: 300px
+    width: 300px
+  @include mobile-lg
+    height: 345px
+    width: 345px
+  @include desktop
+    height: 425px
+    width: 425px
+
+
 
 .panel
-  height: 175px
-  width: 175px
-  border: 10px solid
   border-radius: 100%
   display: inline-block
   animation-duration: 0.75s
@@ -52,9 +102,20 @@ html,body
   position: absolute
   cursor: pointer
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15)
+  @include mobile-sm
+    height: 125px
+    width: 125px
+    border: 8px solid
+  @include mobile-lg
+    height: 140px
+    width: 140px
+    border: 9px solid
+  @include desktop
+    height: 175px
+    width: 175px
+    border: 10px solid
 
 .panel#green
-  //background-color: rgba(52,168,83,1.0)
   bottom: 0
   left: 0
   border-color: rgba(52,168,83,1.0)
@@ -71,22 +132,13 @@ html,body
   left: 0
   border-color: rgba(251,188,5,1.0)
 
-.panel#green:active
+.panel#green:active, .panel.lit#green
   background-color: rgba(52,168,83,0.8)
-.panel#red:active
+.panel#red:active, .panel.lit#red
   background-color: rgba(234,67,53,0.8)
-.panel#blue:active
+.panel#blue:active, .panel.lit#blue
   background-color: rgba(66,133,244,0.80)
-.panel#yellow:active
-  background-color: rgba(251,188,5,0.8)
-
-.panel.lit#green
-  background-color: rgba(52,168,83,0.8)
-.panel.lit#red
-  background-color: rgba(234,67,53,0.8)
-.panel.lit#blue
-  background-color: rgba(66,133,244,0.80)
-.panel.lit#yellow
+.panel#yellow:active, .panel.lit#yellow
   background-color: rgba(251,188,5,0.8)
 
 .status-bar
@@ -94,4 +146,11 @@ html,body
   margin-top: 5px
   text-align: center
   font-weight: bold
-  font-size: 60px
+  @include mobile-sm
+    font-size: 0.85em
+  @include mobile-lg
+    font-size: 0.9em
+  @include tablet
+    font-size: 1.0em
+  @include desktop
+    font-size: 1.0em

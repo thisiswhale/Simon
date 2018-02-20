@@ -1,10 +1,21 @@
 html, body {
   margin: 0;
   font-family: "Kavivanar", cursive;
-  font-size: 1.6em;
   background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/dark_wall.png");
   color: #fff;
   text-shadow: black 1px 0 10px; }
+  @media (min-width: 320px) {
+    html, body {
+      font-size: 1.2em; } }
+  @media (min-width: 369px) {
+    html, body {
+      font-size: 1.25em; } }
+  @media (min-width: 768px) {
+    html, body {
+      font-size: 1.4em; } }
+  @media (min-width: 1024px) {
+    html, body {
+      font-size: 1.6em; } }
 
 .container {
   margin: 0 auto;
@@ -21,8 +32,19 @@ html, body {
   -webkit-animation-duration: 0.5s; }
 
 .nav {
-  display: inline-block;
-  margin: 0 100px; }
+  display: inline-block; }
+  @media (min-width: 320px) {
+    .nav {
+      margin: 10px 10px; } }
+  @media (min-width: 369px) {
+    .nav {
+      margin: 10px 10px; } }
+  @media (min-width: 768px) {
+    .nav {
+      margin: 0 40px; } }
+  @media (min-width: 1024px) {
+    .nav {
+      margin: 0 90px; } }
 
 .start-btn {
   cursor: pointer; }
@@ -37,16 +59,23 @@ html, body {
   color: red; }
 
 .gameboard {
-  height: 425px;
-  width: 425px;
   margin: 0 auto;
   margin-top: 10px;
   position: relative; }
+  @media (min-width: 320px) {
+    .gameboard {
+      height: 300px;
+      width: 300px; } }
+  @media (min-width: 369px) {
+    .gameboard {
+      height: 345px;
+      width: 345px; } }
+  @media (min-width: 1024px) {
+    .gameboard {
+      height: 425px;
+      width: 425px; } }
 
 .panel {
-  height: 175px;
-  width: 175px;
-  border: 10px solid;
   border-radius: 100%;
   display: inline-block;
   animation-duration: 0.75s;
@@ -54,6 +83,21 @@ html, body {
   position: absolute;
   cursor: pointer;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.15); }
+  @media (min-width: 320px) {
+    .panel {
+      height: 125px;
+      width: 125px;
+      border: 8px solid; } }
+  @media (min-width: 369px) {
+    .panel {
+      height: 140px;
+      width: 140px;
+      border: 9px solid; } }
+  @media (min-width: 1024px) {
+    .panel {
+      height: 175px;
+      width: 175px;
+      border: 10px solid; } }
 
 .panel#green {
   bottom: 0;
@@ -75,35 +119,34 @@ html, body {
   left: 0;
   border-color: #fbbc05; }
 
-.panel#green:active {
+.panel#green:active, .panel.lit#green {
   background-color: rgba(52, 168, 83, 0.8); }
 
-.panel#red:active {
+.panel#red:active, .panel.lit#red {
   background-color: rgba(234, 67, 53, 0.8); }
 
-.panel#blue:active {
+.panel#blue:active, .panel.lit#blue {
   background-color: rgba(66, 133, 244, 0.8); }
 
-.panel#yellow:active {
-  background-color: rgba(251, 188, 5, 0.8); }
-
-.panel.lit#green {
-  background-color: rgba(52, 168, 83, 0.8); }
-
-.panel.lit#red {
-  background-color: rgba(234, 67, 53, 0.8); }
-
-.panel.lit#blue {
-  background-color: rgba(66, 133, 244, 0.8); }
-
-.panel.lit#yellow {
+.panel#yellow:active, .panel.lit#yellow {
   background-color: rgba(251, 188, 5, 0.8); }
 
 .status-bar {
   margin: 0 auto;
   margin-top: 5px;
   text-align: center;
-  font-weight: bold;
-  font-size: 60px; }
+  font-weight: bold; }
+  @media (min-width: 320px) {
+    .status-bar {
+      font-size: 0.85em; } }
+  @media (min-width: 369px) {
+    .status-bar {
+      font-size: 0.9em; } }
+  @media (min-width: 768px) {
+    .status-bar {
+      font-size: 1em; } }
+  @media (min-width: 1024px) {
+    .status-bar {
+      font-size: 1em; } }
 
 /*# sourceMappingURL=style.css.map */
