@@ -1,11 +1,8 @@
-
-// Small tablets and large smartphones (landscape view)
 $screen-mobile-sm-min: 320px
 $screen-mobile-lg-min: 369px
-
-// Large tablets and tablets
 $screen-tablet-min: 768px
 $screen-desktop-min: 1024px
+
 @mixin mobile-sm
   @media (min-width: #{$screen-mobile-sm-min})
     @content
@@ -22,7 +19,6 @@ $screen-desktop-min: 1024px
   @media (min-width: #{$screen-desktop-min})
     @content
 
-
 html,body
   margin: 0
   font-family: 'Kavivanar', cursive
@@ -37,7 +33,6 @@ html,body
     font-size: 1.4em
   @include desktop
     font-size: 1.6em
-
 
 .container
   margin: 0 auto
@@ -64,8 +59,6 @@ html,body
   @include desktop
     margin: 0 90px
 
-
-
 .start-btn
   cursor: pointer
 
@@ -91,8 +84,6 @@ html,body
   @include desktop
     height: 425px
     width: 425px
-
-
 
 .panel
   border-radius: 100%
