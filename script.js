@@ -6,7 +6,7 @@ let strict = false;
 const levels = {
   round1: {
     roundSpeed: 1000,
-    soundSpeed: 0.5,
+    soundSpeed: 0.75,
     animateSpeed: '0.75s'
   },
   round5: {
